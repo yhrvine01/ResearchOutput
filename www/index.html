@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Puzzle Game</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Word Puzzle Game</h1>
+    <p>Choose a game mode to get started:</p>
+    <button onclick="selectGameMode('with-question')">Game Mode 1 (With Questions)</button>
+    <button onclick="selectGameMode('without-question')">Game Mode 2 (Without Questions)</button>
+    <button onclick="location.href='rules.html'">
+      Rules
+    </button>
+    <button onclick="location.href='settings.html'">
+      Settings
+    </button>
+  </div>
+  <script>
+    function selectGameMode(mode) {
+      // Save the selected game mode in localStorage
+      localStorage.setItem('gameMode', mode);
+
+      // Redirect to the difficulty selection screen
+      window.location.href = 'difficulty.html';
+    }
+  </script>
+</body>
+</html>
