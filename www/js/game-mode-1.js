@@ -8,6 +8,7 @@ const questions = {
   hard: ["economy", "politics", "relationships"]
 };
 
+
 let score = 0;
 
 // Display a question based on difficulty
