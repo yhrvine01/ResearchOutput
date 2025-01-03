@@ -5,17 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Mode 2</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/game-mode-2.css">
 </head>
 <body>
-  <div id="game-without-question" class="game-container">
-    <h2>Find Words</h2>
-    <p id="jumble">Loading...</p>
-    <input id="word-input" type="text" placeholder="Type a word">
-    <button id="check-word">Check Word</button>
-    <ul id="found-words"></ul>
+  <div id="game-without-question">
+    <div id="word-list">
+      <ul id="found-words"></ul>
+    </div>
+    <p id="jumble">Scrambled Letters:</p>
+    <div id="letter-buttons" class="letter-container"></div>
+    <div class="input-controls">
+      <input id="word-input" type="text" placeholder="Type a word" readonly>
+      <button id="clear-letter" onclick="clearLastLetter()">Clear Last</button>
+      <button id="check-word">Submit</button>
+    </div>
+    <div class="control-buttons">
+      <button id="jumble-button">Jumble</button>
+      <button id="pause-button">Pause</button>
+    </div>
     <p id="word-score">Score: 0</p>
-    <button onclick="location.href='index.html'">Back to Main Menu</button>
+    <p id="round">Round: 1</p>
   </div>
+  
   <script src="js/game-mode-2.js"></script>
 </body>
 </html>
