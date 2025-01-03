@@ -2,26 +2,13 @@
 const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
 let level = parseInt(localStorage.getItem('selectedLevel')) || 1;
 
-// Define questions for each difficulty and level
-const questionsByDifficulty = {
-  easy: {
-    1: ["money", "food", "traffic"],
-    2: ["house", "school", "garden"],
-  },
-  medium: {
-    1: ["work", "health", "weather"],
-    2: ["travel", "fitness", "study"],
-  },
-  hard: {
-    1: ["economy", "politics", "relationships"],
-    2: ["investment", "education", "strategy"],
-  },
-};
-
-// Get the questions for the current level
-const questions = questionsByDifficulty[difficulty][level] || [];
+// Fetch the questions and prompt dynamically
+const { prompt, answers: questions } = getQuestionsAndPrompt(difficulty, level);
 let answeredQuestions = Array(questions.length).fill(false);
 let score = 0;
+
+// Display the dynamic prompt for the level
+document.getElementById("question").textContent = `Level ${level}: ${prompt}`;
 
 // Dynamically populate the answers list with placeholders
 const answersList = document.getElementById("answers");
@@ -32,9 +19,6 @@ questions.forEach((question, index) => {
   listItem.innerHTML = `${index + 1}. <span id="answer${index + 1}">${placeholder}</span>`;
   answersList.appendChild(listItem);
 });
-
-// Display level and question prompt
-document.getElementById("question").textContent = `Level ${level}: Questions!`;
 
 // Handle user input
 document.getElementById("submit-answer").addEventListener("click", () => {
@@ -79,7 +63,7 @@ function completeLevel(level) {
 
 // Function to proceed to the next level
 function goToNextLevel() {
-  const maxLevels = Object.keys(questionsByDifficulty[difficulty]).length; // Total levels for the difficulty
+  const maxLevels = Object.keys(questionBank[difficulty]).length; // Total levels for the difficulty
   if (level < maxLevels) {
     level += 1; // Increment the level
     localStorage.setItem("selectedLevel", level);
@@ -89,4 +73,3 @@ function goToNextLevel() {
     window.location.href = "level-selection.html"; // Return to level selection if no more levels
   }
 }
-
