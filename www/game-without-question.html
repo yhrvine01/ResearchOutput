@@ -8,25 +8,26 @@
   <link rel="stylesheet" href="css/game-mode-2.css">
 </head>
 <body>
-  <div id="game-without-question">
-    <div id="word-list">
-      <ul id="found-words"></ul>
-    </div>
-    <p id="jumble">Scrambled Letters:</p>
-    <div id="letter-buttons" class="letter-container"></div>
-    <div class="input-controls">
-      <input id="word-input" type="text" placeholder="Type a word" readonly>
-      <button id="clear-letter" onclick="clearLastLetter()">Clear Last</button>
-      <button id="check-word">Submit</button>
-    </div>
+  <div id="found-words" class="word-container"></div>
+  <div id="letter-buttons" class="letter-container"></div>
+  <div class="input-controls">
+    <input id="word-input" type="text" placeholder="Type a word" readonly>
+    <button id="clear-letter" onclick="clearLastLetter()">Clear Last</button>
+    <button id="check-word">Submit</button>
     <div class="control-buttons">
       <button id="jumble-button">Jumble</button>
-      <button id="pause-button">Pause</button>
     </div>
-    <p id="word-score">Score: 0</p>
-    <p id="round">Round: 1</p>
   </div>
+  <p id="word-score">Score: 0</p>
+  <p id="round">Round: 1</p>
   
+  
+  
+  <button onclick="location.href='index.html'">Back to Main Menu</button>
+  
+  <script src="js/word-bank.js"></script>
   <script src="js/game-mode-2.js"></script>
+
+  
 </body>
 </html>
