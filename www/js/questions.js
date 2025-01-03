@@ -8,7 +8,7 @@ const questionBank = {
 
       2: { 
         prompt: "Places where people gather", 
-        answers: ["house", "school", "garden", "church"< "theaters"] 
+        answers: ["house", "school", "garden", "church","theaters"] 
       },
 
       3: { 

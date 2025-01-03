@@ -1,11 +1,22 @@
 // Retrieve selected difficulty and level
-const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
-let level = parseInt(localStorage.getItem('selectedLevel')) || 1;
+const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
+let level = parseInt(localStorage.getItem("selectedLevel")) || 1;
+
+let score = parseInt(localStorage.getItem("currentScore")) || 0;
+let highScore = parseInt(localStorage.getItem("highScore")) || 0;
 
 // Fetch the questions and prompt dynamically
 const { prompt, answers: questions } = getQuestionsAndPrompt(difficulty, level);
 let answeredQuestions = Array(questions.length).fill(false);
-let score = 0;
+let revealedHints = Array(questions.length).fill(0);
+
+// Update the score and high score display
+document.getElementById("score").textContent = `Score: ${score}`;
+document.getElementById("highscore").textContent = `High Score: ${highScore}`;
+
+// Set the number of hints based on difficulty
+let hintsRemaining = difficulty === "easy" ? 3 : difficulty === "medium" ? 4 : 5;
+document.getElementById("hints-remaining").textContent = `Hints Remaining: ${hintsRemaining}`;
 
 // Display the dynamic prompt for the level
 document.getElementById("question").textContent = `Level ${level}: ${prompt}`;
@@ -33,8 +44,17 @@ document.getElementById("submit-answer").addEventListener("click", () => {
     document.getElementById(`answer${index + 1}`).textContent = questions[index].toUpperCase();
 
     // Update score
-    score += 10;
-    document.getElementById("score").textContent = `Score: ${score}`;
+   // Update score
+   score += 10;
+   document.getElementById("score").textContent = `Score: ${score}`;
+   localStorage.setItem("currentScore", score);
+
+   // Check for new high score
+   if (score > highScore) {
+     highScore = score;
+     localStorage.setItem("highScore", highScore);
+     document.getElementById("highscore").textContent = `High Score: ${highScore}`;
+   }
 
     // Clear input
     document.getElementById("user-input").value = "";
@@ -51,6 +71,55 @@ document.getElementById("submit-answer").addEventListener("click", () => {
     alert("Incorrect answer, try again!");
   }
 });
+
+// Use a hint
+// Use a hint
+document.getElementById("hint-button").addEventListener("click", () => {
+  if (hintsRemaining > 0) {
+    // Find unanswered indexes
+    const unansweredIndexes = answeredQuestions
+      .map((answered, i) => (!answered && revealedHints[i] < questions[i].length ? i : null))
+      .filter((i) => i !== null);
+
+    if (unansweredIndexes.length > 0) {
+      // Pick a random unanswered question
+      const randomIndex = unansweredIndexes[Math.floor(Math.random() * unansweredIndexes.length)];
+      const word = questions[randomIndex];
+      const revealed = revealedHints[randomIndex];
+
+      // Track revealed positions
+      const revealedPositions = [...document.getElementById(`answer${randomIndex + 1}`).textContent]
+        .map((char, i) => char !== "-" ? i : null)
+        .filter((i) => i !== null);
+
+      const unrevealedIndexes = [...word]
+        .map((_, i) => (revealedPositions.includes(i) ? null : i))
+        .filter((i) => i !== null);
+
+      const randomLetterIndex = unrevealedIndexes[Math.floor(Math.random() * unrevealedIndexes.length)];
+
+      // Update revealed letter
+      revealedHints[randomIndex] += 1;
+      const partialAnswer = [...word]
+        .map((letter, i) =>
+          revealedPositions.includes(i) || i === randomLetterIndex ? letter.toUpperCase() : "-"
+        )
+        .join("");
+
+      document.getElementById(`answer${randomIndex + 1}`).textContent = partialAnswer;
+
+      // Decrease hints and update display
+      hintsRemaining -= 1;
+      document.getElementById("hints-remaining").textContent = `Hints Remaining: ${hintsRemaining}`;
+    } else {
+      alert("No more hints can be used.");
+    }
+  } else {
+    alert("No hints remaining!");
+  }
+});
+
+
 
 // Function to mark the level as complete
 function completeLevel(level) {
