@@ -1,8 +1,9 @@
 // word-bank.js
 const wordBank = {
     easy: [
-      "cat", "dog", "bat", "sun", "rat", "fun", "man", "fan", "pan", "tan",
-      "ban", "can", "ran", "van", "nap", "sap", "tap", "cap", "gap", "map",
+      "star", "tear", "rats", "heart", "earth", "hear", "smart", "mart", "arts", "table",
+      "able", "beat", "clear", "care", "race", "panel", "plane", "lean", "steam", "mate", "teams", 
+      "thing", "night", "thin", "rain", "gain", "grain", "close", "lose", "sole"
     ],
     medium: [
       "apple", "break", "chair", "flame", "smart", "grape", "stone", "light",

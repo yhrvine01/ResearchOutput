@@ -1,3 +1,20 @@
+const settings = JSON.parse(localStorage.getItem("gameSettings")) || { bgMusic: false };
+const bgMusic = new Audio("audio/background-music.mp3");
+
+
+if (settings.bgMusic) {
+  bgMusic.loop = true;
+  bgMusic.play();
+} else {
+  bgMusic.pause();
+}
+
+const clickSound = new Audio("audio/click.mp3");
+if (settings.soundEffects) {
+  document.getElementById("submit-answer").addEventListener("click", () => clickSound.play());
+  document.getElementById("hint-button").addEventListener("click", () => clickSound.play());
+}
+
 // Retrieve selected difficulty and level
 const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
 let level = parseInt(localStorage.getItem("selectedLevel")) || 1;
@@ -142,3 +159,21 @@ function goToNextLevel() {
     window.location.href = "level-selection.html"; // Return to level selection if no more levels
   }
 }
+// Function to play sound effects
+function playSoundEffect() {
+  if (soundEffectsEnabled) {
+    const soundEffectsAudio = document.getElementById('sound-effects-audio');
+    soundEffectsAudio.play();
+  }
+}
+
+// Function to initialize sound effects for a specific page
+function initializePageSoundEffects() {
+  // Add event listeners to buttons or any clickable elements that should have sound effects
+  const buttonsWithSound = document.querySelectorAll('.btn-save, .btn-back, .btn-other'); // Add all button selectors here
+  buttonsWithSound.forEach(button => {
+    button.addEventListener('click', playSoundEffect);
+  });
+}
+
+

@@ -1,0 +1,84 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color, #fff);
+    color: var(--text-color, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Container for Settings */
+  .container {
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--bg-color, #fff);
+    color: var(--text-color, #000);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Heading */
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Settings Items */
+  .settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .settings-item label {
+    font-size: 18px;
+  }
+  
+  .settings-item input[type="checkbox"],
+  .settings-item select {
+    width: auto;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  /* Save Button */
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #7abce3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  button:hover {
+    background-color: #536878;
+  }
+  
+  /* Back Button */
+  .back-button {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #536878;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  .back-button:hover {
+    background-color: #536878;
+  }
+  
+  

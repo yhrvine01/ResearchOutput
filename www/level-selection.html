@@ -3,34 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Level</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Choose a Level</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ6H+6p5STpV2W0k1se6AwwU27uj0y1WpB0tmAN37Wl1X2LtqwCw9kDViW5E" crossorigin="anonymous">
+
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #b3d8f0, #d6efff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222222;
+      margin-bottom: 20px;
+    }
+
+    .level-button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .level-button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      color: white;
+      flex: 1;
+      max-width: 120px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #78c4e6, #5b9fbd);
+      box-shadow: 0 4px 8px rgba(120, 196, 230, 0.5);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #c2d8e4, #9bbac8);
+      box-shadow: 0 4px 8px rgba(155, 186, 200, 0.5);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary:disabled {
+      background: linear-gradient(135deg, #e0e7ec, #cfd8df);
+      box-shadow: none;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1 id="difficulty-title">Choose a Level</h1>
-    <button class="level-button" onclick="startLevel(1)" data-level="1">Level 1</button>
-    <button class="level-button" onclick="startLevel(2)" data-level="2" disabled>Level 2</button>
-    <button class="level-button" onclick="startLevel(3)" data-level="3" disabled>Level 3</button>
-    <button class="level-button" onclick="startLevel(4)" data-level="4" disabled>Level 4</button>
-    <button class="level-button" onclick="startLevel(5)" data-level="5" disabled>Level 5</button>
-    <button class="level-button" onclick="startLevel(6)"  data-level="6" disabled >Level 6</button>
-    <button class="level-button" onclick="startLevel(7)"  data-level="7" disabled >Level 7</button>
-    <button class="level-button" onclick="startLevel(8)"  data-level="8" disabled >Level 8</button>
-    <button class="level-button" onclick="startLevel(9)"  data-level="9" disabled >Level 9</button>
-    <button class="level-button" onclick="startLevel(10)" data-level="10" disabled >Level 10</button>
-    <button class="level-button" onclick="startLevel(11)" data-level="11" disabled >Level 11</button>
-    <button class="level-button" onclick="startLevel(12)" data-level="12" disabled >Level 12</button>
-    <button class="level-button" onclick="startLevel(13)" data-level="13" disabled >Level 13</button>
-    <button class="level-button" onclick="startLevel(14)" data-level="14" disabled >Level 14</button>
-    <button class="level-button" onclick="startLevel(15)" data-level="15" disabled >Level 15</button>
-    <button class="level-button" onclick="startLevel(16)" data-level="16" disabled >Level 16</button>
-    <button class="level-button" onclick="startLevel(17)" data-level="17" disabled >Level 17</button>
-    <button class="level-button" onclick="startLevel(18)" data-level="18" disabled >Level 18</button>
-    <button class="level-button" onclick="startLevel(19)" data-level="19" disabled >Level 19</button>
-    <button class="level-button" onclick="startLevel(20)" data-level="20" disabled >Level 20</button>
 
+  <div class="container">
+    <h1>Choose a Level</h1>
+    <div class="level-button-container">
+      <button class="level-button btn btn-primary" onclick="startLevel(1)">Level 1</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(2)" disabled>Level 2</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(3)" disabled>Level 3</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(4)" disabled>Level 4</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(5)" disabled>Level 5</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(6)" disabled>Level 6</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(7)" disabled>Level 7</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(8)" disabled>Level 8</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(9)" disabled>Level 9</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(10)" disabled>Level 10</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(11)" disabled>Level 11</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(12)" disabled>Level 12</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(13)" disabled>Level 13</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(14)" disabled>Level 14</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(15)" disabled>Level 15</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(16)" disabled>Level 16</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(17)" disabled>Level 17</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(18)" disabled>Level 18</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(19)" disabled>Level 19</button>
+      <button class="level-button btn btn-secondary" onclick="startLevel(20)" disabled>Level 20</button>
+    </div>
   </div>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb6O9pG7tF2Q5bRd2k5sEKZ5rH6IKW5zFokV0Ds/BO3vYgk2s" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0wZ8FqjQsa6Ymg9rZKr6X5w8PbD8sY7eMbFFNBwbt8A0gXb" crossorigin="anonymous"></script>
+
+  <!-- Custom JS -->
+  <script>
+    function startLevel(level) {
+      alert(`Starting Level ${level}...`);
+      // Add functionality to navigate to the respective level
+    }
+  </script>
+
+  <!-- Custom JS -->
+  <script src="js/settings-loader.js"></script>
   <script src="js/level-selection.js"></script>
+
 </body>
 </html>

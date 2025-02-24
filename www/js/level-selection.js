@@ -32,4 +32,25 @@ function completeLevel(level) {
     localStorage.setItem('completedLevels', JSON.stringify(completedLevels));
   }
 }
+// Function to play sound effects
+function playSoundEffect() {
+  if (soundEffectsEnabled) {
+    const soundEffectsAudio = document.getElementById('sound-effects-audio');
+    soundEffectsAudio.play();
+  }
+}
+
+// Function to initialize sound effects for a specific page
+function initializePageSoundEffects() {
+  // Add event listeners to buttons or any clickable elements that should have sound effects
+  const buttonsWithSound = document.querySelectorAll('.btn-save, .btn-back, .btn-other'); // Add all button selectors here
+  buttonsWithSound.forEach(button => {
+    button.addEventListener('click', playSoundEffect);
+  });
+} 
+
+
+
+
+
 

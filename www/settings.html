@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+
+  <!-- Google Fonts (Poppins for a cute, fun feel) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #81D4FA, #1E3A8A); /* Baby blue to dark blue gradient */
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #1E3A8A; /* Dark blue */
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    .settings-item {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .settings-item label {
+      font-size: 1.1rem;
+      color: #1E3A8A; /* Dark blue */
+    }
+
+    .settings-item input {
+      margin-left: 10px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 30px;
+      margin-top: 20px;
+      border-radius: 50px;  /* Rounded oblong shape */
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, #81D4FA, #4FC3F7); /* Baby blue gradient */
+      color: white;
+    }
+
+    .btn-save:hover {
+      background: linear-gradient(135deg, #4FC3F7, #0288D1); /* Darker blue on hover */
+    }
+
+    .btn-back {
+      background: linear-gradient(135deg, #64B5F6, #1E3A8A); /* Blue gradient for back button */
+      color: white;
+      margin-top: 10px;
+    }
+
+    .btn-back:hover {
+      background: linear-gradient(135deg, #1E3A8A, #0288D1); /* Darker blue gradient on hover */
+    }
+
+    .settings-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+    <form id="settings-form">
+      <!-- Background Music Toggle -->
+      <div class="settings-item">
+        <label for="bg-music">Background Music:</label>
+        <input type="checkbox" id="bg-music" />
+      </div>
+
+      <!-- Sound Effects Toggle -->
+      <div class="settings-item">
+        <label for="sound-effects">Sound Effects:</label>
+        <input type="checkbox" id="sound-effects" />
+      </div>
+
+      <button type="button" class="btn-save" id="save-settings">Save Settings</button>
+    </form>
+    <button class="btn-back" onclick="window.location.href='index.html'">Back to Main Menu</button>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Example Audio for Background Music and Sound Effects -->
+  <audio id="bg-music-audio" loop>
+    <source src="audio/background-music.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <audio id="sound-effects-audio">
+    <source src="audio/click.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Function to load settings from localStorage and apply them
+    function loadSettings() {
+      // Get saved values from localStorage
+      const bgMusicChecked = localStorage.getItem('bg-music') === 'true';
+      const soundEffectsChecked = localStorage.getItem('sound-effects') === 'true';
+
+      // Set the checkbox state based on saved settings
+      document.getElementById('bg-music').checked = bgMusicChecked;
+      document.getElementById('sound-effects').checked = soundEffectsChecked;
+
+      // Apply the audio settings
+      const bgMusicAudio = document.getElementById('bg-music-audio');
+      const soundEffectsAudio = document.getElementById('sound-effects-audio');
+
+      // Control background music (play or pause based on checkbox state)
+      if (bgMusicChecked) {
+        bgMusicAudio.play();
+      } else {
+        bgMusicAudio.pause();
+      }
+
+      // Control sound effects (play or pause based on checkbox state)
+      if (soundEffectsChecked) {
+        soundEffectsAudio.play();
+      } else {
+        soundEffectsAudio.pause();
+      }
+    }
+
+    // Function to save settings to localStorage
+    function saveSettings() {
+      const bgMusicChecked = document.getElementById('bg-music').checked;
+      const soundEffectsChecked = document.getElementById('sound-effects').checked;
+
+      // Save the settings to localStorage
+      localStorage.setItem('bg-music', bgMusicChecked);
+      localStorage.setItem('sound-effects', soundEffectsChecked);
+
+      // Apply the audio settings
+      const bgMusicAudio = document.getElementById('bg-music-audio');
+      const soundEffectsAudio = document.getElementById('sound-effects-audio');
+
+      // Control background music (play or pause based on checkbox state)
+      if (bgMusicChecked) {
+        bgMusicAudio.play();
+      } else {
+        bgMusicAudio.pause();
+      }
+
+      // Control sound effects (play or pause based on checkbox state)
+      if (soundEffectsChecked) {
+        soundEffectsAudio.play();
+      } else {
+        soundEffectsAudio.pause();
+      }
+    }
+
+    // Call the loadSettings function to apply the saved settings when the page loads
+    window.onload = function() {
+      loadSettings();
+
+      // Add event listener to save settings when the form is submitted
+      document.getElementById('save-settings').addEventListener('click', saveSettings);
+    }
+  </script>
+</body>
+</html>

@@ -1,3 +1,21 @@
+const settings = JSON.parse(localStorage.getItem("gameSettings")) || { bgMusic: false };
+const bgMusic = new Audio("audio/background-music.mp3");
+
+if (settings.bgMusic) {
+  bgMusic.play();
+  bgMusic.loop = true;
+} else {
+  bgMusic.pause();
+}
+
+const clickSound = new Audio("audio/click.mp3");
+if (settings.soundEffects) {
+  document.getElementById("clear-letter").addEventListener("click", () => clickSound.play());
+  document.getElementById("letter-buttons").addEventListener("click", () => clickSound.play());
+  document.getElementById("check-word").addEventListener("click", () => clickSound.play());
+  document.getElementById("jumble-button").addEventListener("click", () => clickSound.play());
+}
+
 // Access the global wordBank object
 const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
 // Initialize global variables
@@ -20,7 +38,9 @@ function findAnagrams(word) {
     "cat", "act", "dog", "god", "bat", "tab", "sun", "fun", "rat", "art", "tar",
     "apple", "break", "chair", "flame", "smart", "grape", "stone", "light",
     "crown", "cloud", "plant", "river", "beach", "house", "storm", "table",
-    "sugar", "piano", "phone", "clock",
+    "sugar", "piano", "phone", "clock","star", "tear", "rats", "heart", "earth", "hear", "smart", "mart", "arts", "table",
+      "able", "beat", "clear", "care", "race", "panel", "plane", "lean", "steam", "mate", "teams", 
+      "thing", "night", "thin", "rain", "gain", "grain", "close", "lose", "sole",
   ];
 
   const wordLetters = [...word];
