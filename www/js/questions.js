@@ -3,12 +3,26 @@ const questionBank = {
     easy: {
       1: { 
         prompt: "Things people complain about", 
-        answers: ["money", "food", "traffic", "noise", "prices"] 
+        answers: ["money", "food", "traffic", "noise", "prices"],
+        descriptions: {
+          "money": "Money is a common source of stress due to expenses and financial responsibilities.",
+          "food": "People often complain about food quality, taste, or prices at restaurants.",
+          "traffic": "Traffic congestion is a major issue in cities, leading to delays and frustration.",
+          "noise": "Loud noises from construction, neighbors, or vehicles can be disturbing.",
+          "prices": "Rising prices of goods and services can lead to economic concerns."
+        }
       },
-
+      
       2: { 
         prompt: "Places where people gather", 
-        answers: ["house", "school", "garden", "church","theaters"] 
+        answers: ["house", "school", "garden", "church","theaters"],
+        descriptions: {
+          "house": "A home is where families gather for meals, conversations, and bonding.",
+          "school": "Schools are educational institutions where students learn and interact.",
+          "garden": "Gardens are outdoor spaces where people grow plants and relax.",
+          "church": "A church is a place of worship and religious gatherings.",
+          "theaters": "Theaters are venues where people watch movies, plays, or performances."
+        }
       },
 
       3: { 
@@ -127,12 +141,12 @@ const questionBank = {
   // Function to get a random set of questions and prompt based on difficulty and level
   function getQuestionsAndPrompt(difficulty, level) {
     const data = questionBank[difficulty]?.[level];
-    if (!data) return { prompt: "No prompt available", answers: [] };
+    if (!data) return { prompt: "No prompt available", answers: [], descriptions: {} };
   
     return {
-      prompt: data.prompt,
-      answers: data.answers.sort(() => Math.random() - 0.5), // Shuffle the answers
+        prompt: data.prompt,
+        answers: data.answers.sort(() => Math.random() - 0.5), // Shuffle the answers
+        descriptions: data.descriptions || {} // Ensure descriptions are included
     };
   }
-  
   

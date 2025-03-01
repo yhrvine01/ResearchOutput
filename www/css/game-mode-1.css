@@ -1,0 +1,124 @@
+
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #b3d8f0, #d6efff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #answer-description {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #343a40;
+    margin-top: 5px;  /* Reduce space above */
+    margin-bottom: 10px; /* Space between input field */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    text-align: center;
+}
+
+
+  
+  .game-container {
+    max-width: 600px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 20px;
+  }
+  
+  ul#answers {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul#answers li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #495057;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+  }
+  
+  #hints-remaining {
+    font-size: 1.1em;
+    color: #6c757d;
+    text-align: center;
+  }
+  
+  #hint-button,
+  #submit-answer {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #hint-button {
+    background-color: #ffc107;
+    color: #fff;
+  }
+  
+  #hint-button:hover {
+    background-color: #e0a800;
+  }
+  
+  #submit-answer {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  #submit-answer:hover {
+    background-color: #0056b3;
+  }
+  
+  #score, #highscore {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .back-button {
+    font-size: 1.1em;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+  

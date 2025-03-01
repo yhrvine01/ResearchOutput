@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings</title>
 
+  <script src="js/audioManager.js"></script>
+<script src="js/settings.js"></script>
+
   <!-- Google Fonts (Poppins for a cute, fun feel) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   
@@ -115,16 +118,8 @@
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Example Audio for Background Music and Sound Effects -->
-  <audio id="bg-music-audio" loop>
-    <source src="audio/background-music.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
 
-  <audio id="sound-effects-audio">
-    <source src="audio/click.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
+
 
   <script>
     // Function to load settings from localStorage and apply them
@@ -156,11 +151,13 @@
       }
     }
 
+
     // Function to save settings to localStorage
     function saveSettings() {
       const bgMusicChecked = document.getElementById('bg-music').checked;
       const soundEffectsChecked = document.getElementById('sound-effects').checked;
 
+      
       // Save the settings to localStorage
       localStorage.setItem('bg-music', bgMusicChecked);
       localStorage.setItem('sound-effects', soundEffectsChecked);
