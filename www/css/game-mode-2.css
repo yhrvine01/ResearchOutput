@@ -181,3 +181,145 @@ h1 {
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #B3E5FC, #81D4FA); /* Light baby blue gradient */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 800px;
+  padding: 40px;
+  background: linear-gradient(135deg, #ffffff, #E3F2FD); /* White to light blue gradient */
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.2rem;
+  color: #0288D1; /* Darker blue */
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+#found-words {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+.input-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-controls input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.input-controls button {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0288D1;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-controls button:hover {
+  background-color: #0277BD;
+  transform: scale(1.05); /* Slight button enlargement on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.letter-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Add spacing between buttons */
+  margin-bottom: 10px;
+  flex-wrap: revert; /* Ensures buttons wrap on smaller screens */
+}
+
+.letter-button {
+  display: inline-flex; /* Align buttons horizontally */
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #4FC3F7;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+  font-size: 1.2em; /* Increase font size for better visibility */
+  transition: background-color 0.3s ease;
+}
+
+.letter-button:hover {
+  background-color: #0288D1;
+}
+
+#word-score,
+#round {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#word-score {
+  margin-top: 20px;
+}
+
+.control-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-back {
+  background: linear-gradient(135deg, #81D4FA, #0288D1); /* Blue gradient */
+  color: white;
+  font-weight: 600;
+  padding: 15px 35px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: linear-gradient(135deg, #0288D1, #81D4FA);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating animation for the title */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
