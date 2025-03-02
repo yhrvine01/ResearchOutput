@@ -1,19 +1,7 @@
 const settings = JSON.parse(localStorage.getItem("gameSettings")) || { bgMusic: false };
-const bgMusic = new Audio("audio/background-music.mp3");
 
-
-if (settings.bgMusic) {
-  bgMusic.loop = true;
-  bgMusic.play();
-} else {
-  bgMusic.pause();
-}
-
-const clickSound = new Audio("audio/click.mp3");
-if (settings.soundEffects) {
-  document.getElementById("submit-answer").addEventListener("click", () => clickSound.play());
-  document.getElementById("hint-button").addEventListener("click", () => clickSound.play());
-}
+// Background music setup
+audioManager.loadSettings();
 
 // Retrieve selected difficulty and level
 const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
@@ -22,89 +10,86 @@ let level = parseInt(localStorage.getItem("selectedLevel")) || 1;
 let score = parseInt(localStorage.getItem("currentScore")) || 0;
 let highScore = parseInt(localStorage.getItem("highScore")) || 0;
 
-// Fetch the questions and prompt dynamically
-const { prompt, answers: questions } = getQuestionsAndPrompt(difficulty, level);
+// Fetch the questions, answers, and descriptions dynamically
+const { prompt, answers: questions, descriptions } = getQuestionsAndPrompt(difficulty, level);
+if (!descriptions) console.error("Descriptions are missing from questions data.");
+
 let answeredQuestions = Array(questions.length).fill(false);
 let revealedHints = Array(questions.length).fill(0);
 
-// Update the score and high score display
-document.getElementById("score").textContent = `Score: ${score}`;
-document.getElementById("highscore").textContent = `High Score: ${highScore}`;
+// DOM elements
+const descriptionBox = document.getElementById("answer-description");
+const answersList = document.getElementById("answers");
+const scoreDisplay = document.getElementById("score");
+const highScoreDisplay = document.getElementById("highscore");
+const hintsRemainingDisplay = document.getElementById("hints-remaining");
+const userInput = document.getElementById("user-input");
 
-// Set the number of hints based on difficulty
-let hintsRemaining = difficulty === "easy" ? 3 : difficulty === "medium" ? 4 : 5;
-document.getElementById("hints-remaining").textContent = `Hints Remaining: ${hintsRemaining}`;
-
-// Display the dynamic prompt for the level
+scoreDisplay.textContent = `Score: ${score}`;
+highScoreDisplay.textContent = `High Score: ${highScore}`;
+hintsRemainingDisplay.textContent = `Hints Remaining: ${difficulty === "easy" ? 3 : difficulty === "medium" ? 4 : 5}`;
 document.getElementById("question").textContent = `Level ${level}: ${prompt}`;
 
-// Dynamically populate the answers list with placeholders
-const answersList = document.getElementById("answers");
-answersList.innerHTML = ""; // Clear any existing content
+// Populate answer list with placeholders
+answersList.innerHTML = "";
 questions.forEach((question, index) => {
-  const placeholder = "-".repeat(question.length); // Generate dashes matching the word length
   const listItem = document.createElement("li");
-  listItem.innerHTML = `${index + 1}. <span id="answer${index + 1}">${placeholder}</span>`;
+  listItem.innerHTML = `${index + 1}. <span id="answer${index + 1}">${"-".repeat(question.length)}</span>`;
   answersList.appendChild(listItem);
 });
 
 // Handle user input
 document.getElementById("submit-answer").addEventListener("click", () => {
-  const userInput = document.getElementById("user-input").value.toLowerCase();
-  const index = questions.indexOf(userInput);
+  const userAnswer = userInput.value.toLowerCase();
+  const index = questions.indexOf(userAnswer);
 
   if (index !== -1 && !answeredQuestions[index]) {
-    // Mark the question as answered
     answeredQuestions[index] = true;
-
-    // Display the correct answer in the list
     document.getElementById(`answer${index + 1}`).textContent = questions[index].toUpperCase();
 
+    // Show the description of the answered word
+    descriptionBox.textContent = descriptions[userAnswer] || "No description available.";
+    descriptionBox.style.display = "block";
+
     // Update score
-   // Update score
-   score += 10;
-   document.getElementById("score").textContent = `Score: ${score}`;
-   localStorage.setItem("currentScore", score);
+    score += 10;
+    scoreDisplay.textContent = `Score: ${score}`;
+    localStorage.setItem("currentScore", score);
 
-   // Check for new high score
-   if (score > highScore) {
-     highScore = score;
-     localStorage.setItem("highScore", highScore);
-     document.getElementById("highscore").textContent = `High Score: ${highScore}`;
-   }
+    // Check for new high score
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem("highScore", highScore);
+      highScoreDisplay.textContent = `High Score: ${highScore}`;
+    }
 
-    // Clear input
-    document.getElementById("user-input").value = "";
+    userInput.value = "";
 
     // Check if all questions are answered
     if (answeredQuestions.every((ans) => ans)) {
       alert(`Congratulations! You've completed Level ${level}.`);
-      completeLevel(level); // Unlock the next level
-      goToNextLevel(); // Automatically go to the next level
+      completeLevel(level);
+      goToNextLevel();
     }
-  } else if (answeredQuestions[index]) {
-    alert("You already answered this question!");
   } else {
-    alert("Incorrect answer, try again!");
+    alert(answeredQuestions[index] ? "You already answered this question!" : "Incorrect answer, try again!");
   }
 });
 
-// Use a hint
-// Use a hint
+// Handle hint usage
 document.getElementById("hint-button").addEventListener("click", () => {
+  let hintsRemaining = parseInt(hintsRemainingDisplay.textContent.match(/\d+/)[0]);
+
   if (hintsRemaining > 0) {
-    // Find unanswered indexes
     const unansweredIndexes = answeredQuestions
       .map((answered, i) => (!answered && revealedHints[i] < questions[i].length ? i : null))
       .filter((i) => i !== null);
 
     if (unansweredIndexes.length > 0) {
-      // Pick a random unanswered question
       const randomIndex = unansweredIndexes[Math.floor(Math.random() * unansweredIndexes.length)];
       const word = questions[randomIndex];
-      const revealed = revealedHints[randomIndex];
 
-      // Track revealed positions
+      // Reveal one letter
       const revealedPositions = [...document.getElementById(`answer${randomIndex + 1}`).textContent]
         .map((char, i) => char !== "-" ? i : null)
         .filter((i) => i !== null);
@@ -113,21 +98,17 @@ document.getElementById("hint-button").addEventListener("click", () => {
         .map((_, i) => (revealedPositions.includes(i) ? null : i))
         .filter((i) => i !== null);
 
-      const randomLetterIndex = unrevealedIndexes[Math.floor(Math.random() * unrevealedIndexes.length)];
+      if (unrevealedIndexes.length > 0) {
+        const randomLetterIndex = unrevealedIndexes[Math.floor(Math.random() * unrevealedIndexes.length)];
 
-      // Update revealed letter
-      revealedHints[randomIndex] += 1;
-      const partialAnswer = [...word]
-        .map((letter, i) =>
-          revealedPositions.includes(i) || i === randomLetterIndex ? letter.toUpperCase() : "-"
-        )
-        .join("");
+        revealedHints[randomIndex] += 1;
+        const partialAnswer = [...word]
+          .map((letter, i) => (revealedPositions.includes(i) || i === randomLetterIndex ? letter.toUpperCase() : "-"))
+          .join("");
 
-      document.getElementById(`answer${randomIndex + 1}`).textContent = partialAnswer;
-
-      // Decrease hints and update display
-      hintsRemaining -= 1;
-      document.getElementById("hints-remaining").textContent = `Hints Remaining: ${hintsRemaining}`;
+        document.getElementById(`answer${randomIndex + 1}`).textContent = partialAnswer;
+        hintsRemainingDisplay.textContent = `Hints Remaining: ${--hintsRemaining}`;
+      }
     } else {
       alert("No more hints can be used.");
     }
@@ -135,8 +116,6 @@ document.getElementById("hint-button").addEventListener("click", () => {
     alert("No hints remaining!");
   }
 });
-
-
 
 // Function to mark the level as complete
 function completeLevel(level) {
@@ -149,31 +128,12 @@ function completeLevel(level) {
 
 // Function to proceed to the next level
 function goToNextLevel() {
-  const maxLevels = Object.keys(questionBank[difficulty]).length; // Total levels for the difficulty
+  const maxLevels = Object.keys(questionBank[difficulty]).length;
   if (level < maxLevels) {
-    level += 1; // Increment the level
-    localStorage.setItem("selectedLevel", level);
-    location.reload(); // Reload the current page to start the next level
+    localStorage.setItem("selectedLevel", ++level);
+    location.reload();
   } else {
     alert("Congratulations! You've completed all levels for this difficulty.");
-    window.location.href = "level-selection.html"; // Return to level selection if no more levels
+    window.location.href = "level-selection.html";
   }
 }
-// Function to play sound effects
-function playSoundEffect() {
-  if (soundEffectsEnabled) {
-    const soundEffectsAudio = document.getElementById('sound-effects-audio');
-    soundEffectsAudio.play();
-  }
-}
-
-// Function to initialize sound effects for a specific page
-function initializePageSoundEffects() {
-  // Add event listeners to buttons or any clickable elements that should have sound effects
-  const buttonsWithSound = document.querySelectorAll('.btn-save, .btn-back, .btn-other'); // Add all button selectors here
-  buttonsWithSound.forEach(button => {
-    button.addEventListener('click', playSoundEffect);
-  });
-}
-
-

@@ -1,126 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Mode 1</title>
 
+  <script src="js/audioManager.js"></script>
+  <script src="js/settings.js"></script>
+
+
   <!-- Bootstrap CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ6H+6p5STpV2W0k1se6AwwU27uj0y1WpB0tmAN37Wl1X2LtqwCw9kDViW5E" crossorigin="anonymous">
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEJ6H+6p5STpV2W0k1se6AwwU27uj0y1WpB0tmAN37Wl1X2LtqwCw9kDViW5E" crossorigin="anonymous">
+
   <!-- Google Fonts (Poppins) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/game-mode-1.css">
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #b3d8f0, #d6efff);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .game-container {
-      max-width: 600px;
-      padding: 30px;
-      background-color: white;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2em;
-      font-weight: 700;
-      color: #343a40;
-      margin-bottom: 20px;
-    }
-
-    ul#answers {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    ul#answers li {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-      color: #495057;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 1.2em;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ced4da;
-    }
-
-    #hints-remaining {
-      font-size: 1.1em;
-      color: #6c757d;
-      text-align: center;
-    }
-
-    #hint-button,
-    #submit-answer {
-      width: 100%;
-      padding: 12px;
-      font-size: 1.2em;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-    }
-
-    #hint-button {
-      background-color: #ffc107;
-      color: #fff;
-    }
-
-    #hint-button:hover {
-      background-color: #e0a800;
-    }
-
-    #submit-answer {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    #submit-answer:hover {
-      background-color: #0056b3;
-    }
-
-    #score, #highscore {
-      font-size: 1.2em;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .back-button {
-      font-size: 1.1em;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 50px;
-      border: none;
-      background-color: #6c757d;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .back-button:hover {
-      background-color: #5a6268;
-    }
-  </style>
 </head>
+
 <body>
 
   <div id="game-with-question" class="game-container">
@@ -134,7 +36,13 @@
       <li>6. <span id="answer6">----</span></li>
       <li>7. <span id="answer7">----</span></li>
     </ul>
+
+
+    <p id="answer-description" style="display: none;"></p>
+
+
     <input id="user-input" type="text" placeholder="Type your answer">
+
     <p id="hints-remaining">Hints Remaining: 3</p>
     <button id="hint-button">Use Hint</button>
     <button id="submit-answer">Submit</button>
@@ -146,11 +54,15 @@
   </div>
 
   <!-- Bootstrap JS and Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb6O9pG7tF2Q5bRd2k5sEKZ5rH6IKW5zFokV0Ds/BO3vYgk2s" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0wZ8FqjQsa6Ymg9rZKr6X5w8PbD8sY7eMbFFNBwbt8A0gXb" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz4fnFO9gyb6O9pG7tF2Q5bRd2k5sEKZ5rH6IKW5zFokV0Ds/BO3vYgk2s"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-pzjw8f+ua7Kw1TIq0wZ8FqjQsa6Ymg9rZKr6X5w8PbD8sY7eMbFFNBwbt8A0gXb" crossorigin="anonymous"></script>
 
   <!-- Custom JS -->
   <script src="js/settings-loader.js"></script>
+
   <script src="js/questions.js"></script>
   <script src="js/game-mode-1.js"></script>
 
@@ -167,4 +79,5 @@
   </script>
 
 </body>
+
 </html>
