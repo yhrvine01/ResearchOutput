@@ -35,13 +35,30 @@ initializeWordList(validWords);
 // Function to find all possible anagrams for a given word
 function findAnagrams(word) {
   const dictionary = [
-    "cat", "act", "dog", "god", "bat", "tab", "sun", "fun", "rat", "art", "tar",
+    "cat", "act", "dog", "god", "bat", "tab", "sun", "fun", "rat", "art", 
     "apple", "break", "chair", "flame", "smart", "grape", "stone", "light",
     "crown", "cloud", "plant", "river", "beach", "house", "storm", "table",
     "sugar", "piano", "phone", "clock","star", "tear", "rats", "heart", "earth", "hear", "smart", "mart", "arts", "table",
       "able", "beat", "clear", "care", "race", "panel", "plane", "lean", "steam", "mate", "teams", 
-      "thing", "night", "thin", "rain", "gain", "grain", "close", "lose", "sole",
-  ];
+      "thing", "night", "thin", "rain", "gain", "grain", "close", "lose", "sole", "hat", "heat", "apple", "break", "chair", "flame", "smart", "grape", "stone", "light",
+      "crown", "cloud", "plant", "river", "beach", "house", "storm", "table",
+      "sugar", "piano", "phone", "clock","complex", "obstacle", "difficult", "strategy", "puzzle", "problem",
+      "solution", "analyze", "fragment", "magnet", "gravity", "physics",
+      "quantum", "tension", "balance", "network", "circuit", "neutral",
+      "dynamic", "logical","complex", "obstacle", "difficult", "strategy", "puzzle", "problem",
+      "solution", "analyze", "fragment", "magnet", "gravity", "physics",
+      "quantum", "tension", "balance", "network", "circuit", "neutral",
+      "dynamic", "logical", "eat", "ate", "ear", "meat", "sat", "care", "car", "mat", "mate"
+       ,"team", "sea", "cole", "cool", "hate", "rate", "seat", "set", "sit", "ace", "tone", "bake", "hair", "ant","lock", "listen", "list", "silent", "slit",
+      "each", "able", "cable", "tab", "vase", "save", "part","trap", "rap"
+    ,"elbow", "below", "bow", "low","owl", "blow", "bored", "robbed", "bed", "triangle",
+    "giant", "trail" , "late", "rage", "alert", "angle", "grain", "rain", "gate",
+    "raincoat", "train", "actor", "actor" , "reminder",  "render", "miner", "diner", "dinner", "rind", "mind", "end",
+    "campfire", "pacifier", "fame", "fire", "face", "prime", "carp"
+
+
+
+    ];
 
   const wordLetters = [...word];
   const validWords = dictionary.filter((dictWord) => {
