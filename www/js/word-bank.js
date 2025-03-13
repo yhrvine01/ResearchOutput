@@ -20,7 +20,7 @@ const wordBank = {
       "complex", "obstacle", "difficult", "strategy", "puzzle", "problem",
       "solution", "analyze", "fragment", "magnet", "gravity", "physics",
       "quantum", "tension", "balance", "network", "circuit", "neutral",
-      "dynamic", "logical",
+      "dynamic", "logical","imagination", "migration", "nation", "mango", "magic", "giant", "again", "man", "main", "mint","tong", "into", "tag", "tin"
     ],
   };
   

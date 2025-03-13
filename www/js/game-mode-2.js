@@ -54,7 +54,8 @@ function findAnagrams(word) {
     ,"elbow", "below", "bow", "low","owl", "blow", "bored", "robbed", "bed", "triangle",
     "giant", "trail" , "late", "rage", "alert", "angle", "grain", "rain", "gate",
     "raincoat", "train", "actor", "actor" , "reminder",  "render", "miner", "diner", "dinner", "rind", "mind", "end",
-    "campfire", "pacifier", "fame", "fire", "face", "prime", "carp"
+    "campfire", "pacifier", "fame", "fire", "face", "prime", "carp", "imagination", "migration", "nation", "mango", "magic", "giant", "again", "man", "main", "mint","tong", "into", "tag", "tin"
+    
 
 
 
